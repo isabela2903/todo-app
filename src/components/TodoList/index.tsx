@@ -65,7 +65,7 @@ const TodoList = ({
                     {todo.text}
                   </p>
                 </div>
-                <button className="cursor-pointer hover:opacity-50" onClick={() => deleteTodo(todo.id)}>
+                <button className="hidden group-hover:block cursor-pointer hover:opacity-50" onClick={() => deleteTodo(todo.id)}>
                   <img
                     src="/images/icon-cross.svg"
                     alt="Botão para deletar tarefa"
