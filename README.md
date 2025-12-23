@@ -1,6 +1,11 @@
 # Todo App – React + Vite + Tailwind
 Aplicação simples de lista de tarefas (Todo) feita com React, Vite e Tailwind CSS, permitindo adicionar, marcar como concluída, filtrar e remover tarefas.
 
+## Demo
+
+Acesse o projeto online:  
+[https://todo-app-five-sigma-30.vercel.app/]
+
 ## Funcionalidades
  * Adicionar novas tarefas.
 
