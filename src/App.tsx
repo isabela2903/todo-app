@@ -4,6 +4,7 @@ import TodoHeader from "./components/TodoHeader";
 import TodoList from "./components/TodoList";
 import { useTodo } from "./hooks/useTodo";
 
+
 function App() {
   const {
     addTodo,
@@ -13,6 +14,8 @@ function App() {
     setFilter,
     filter,
     deleteTodo,
+    deleteAll,
+    completeAll,
   } = useTodo();
 
   return (
@@ -28,6 +31,8 @@ function App() {
         filter={filter}
         clearCompleted={clearCompleted}
         deleteTodo={deleteTodo}
+        deleteAll={deleteAll}
+        completeAll={completeAll}
       />
     </TodoContainer>
   );

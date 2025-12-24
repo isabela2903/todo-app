@@ -49,6 +49,23 @@ export const useTodo = () => {
     setTodoList(newTodoList);
   };
 
+  const completeAll = () => {
+    const completedTodoList = todoList.map((todo) => {
+      if (todo.completed === false) {
+        const completed = !todo.completed;
+
+        return {
+          ...todo,
+          completed,
+        };
+      }
+
+      return todo;
+    });
+
+    setTodoList(completedTodoList);
+  }
+
   const filteredTodos = todoList.filter((todo) => {
     if (filter === "active") return !todo.completed;
     if (filter === "completed") return todo.completed;
@@ -63,6 +80,15 @@ export const useTodo = () => {
     setTodoList((prev) => prev.filter((todo) => todo.id !== id));
   }
 
+  const deleteAll = () => {
+    setTodoList([])
+  }
+
+function bodyColor() {
+  
+}
+
+
   return {
     addTodo,
     toggleTodoCompleted,
@@ -70,6 +96,8 @@ export const useTodo = () => {
     clearCompleted,
     setFilter,
     filter,
-    deleteTodo
+    deleteTodo,
+    deleteAll,
+    completeAll,
   };
 };

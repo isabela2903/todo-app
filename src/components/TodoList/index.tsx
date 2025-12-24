@@ -10,7 +10,9 @@ interface TodoListProps {
   setFilter: (filter: "all" | "active" | "completed") => void;
   filter: "all" | "active" | "completed";
   clearCompleted: () => void;
-  deleteTodo: (id:number) => void;
+  deleteTodo: (id: number) => void;
+  deleteAll: () => void;
+  completeAll: () => void;
 }
 
 const TodoList = ({
@@ -19,13 +21,46 @@ const TodoList = ({
   setFilter,
   filter,
   clearCompleted,
-  deleteTodo
+  deleteTodo,
+  deleteAll,
+  completeAll,
 }: TodoListProps) => {
   const { theme } = useContext(ThemeContext);
 
   return (
     <>
-      <div className={`${themeConfig[theme].todo.backgroundColor} rounded-md`}>
+      <div
+        className={`flex justify-center gap-5 py-4 rounded-md ${themeConfig[theme].layout.textColor} ${themeConfig[theme].todo.backgroundColor} mt-4`}
+      >
+        <button
+          className={`${
+            filter === "all" ? "text-bright-blue" : ""
+          } cursor-pointer ${themeConfig[theme].layout.hoverColor}`}
+          onClick={() => setFilter("all")}
+        >
+          All
+        </button>
+        <button
+          className={`${
+            filter === "active" ? "text-bright-blue" : ""
+          } cursor-pointer ${themeConfig[theme].layout.hoverColor}`}
+          onClick={() => setFilter("active")}
+        >
+          Active
+        </button>
+        <button
+          className={`${
+            filter === "completed" ? "text-bright-blue" : ""
+          } cursor-pointer ${themeConfig[theme].layout.hoverColor}`}
+          onClick={() => setFilter("completed")}
+        >
+          Completed
+        </button>
+      </div>
+
+      <div
+        className={`${themeConfig[theme].todo.backgroundColor} rounded-md mt-2`}
+      >
         <ul>
           {todoList.map((todo) => (
             <li
@@ -65,7 +100,10 @@ const TodoList = ({
                     {todo.text}
                   </p>
                 </div>
-                <button className="lg:hidden group-hover:block cursor-pointer hover:opacity-50" onClick={() => deleteTodo(todo.id)}>
+                <button
+                  className="lg:hidden group-hover:block cursor-pointer hover:opacity-50"
+                  onClick={() => deleteTodo(todo.id)}
+                >
                   <img
                     src="/images/icon-cross.svg"
                     alt="Botão para deletar tarefa"
@@ -77,12 +115,12 @@ const TodoList = ({
         </ul>
 
         <div
-          className={`text-sm flex justify-between p-4 ${themeConfig[theme].layout.textColor}`}
+          className={`text-sm p-4 ${themeConfig[theme].layout.textColor} text-center`}
         >
           <p>{todoList.length} items left</p>
 
           <div className="hidden sm:flex gap-4">
-            <button
+            {/* <button
               className={`${
                 filter === "all" ? "text-bright-blue" : ""
               } cursor-pointer ${themeConfig[theme].layout.hoverColor}`}
@@ -105,44 +143,31 @@ const TodoList = ({
               onClick={() => setFilter("completed")}
             >
               Completed
-            </button>
+            </button> */}
           </div>
-
-          <button
-            className={`cursor-pointer ${themeConfig[theme].layout.hoverColor}`}
-            onClick={() => clearCompleted()}
-          >
-            Clear Completed
-          </button>
         </div>
       </div>
 
       <div
-        className={`flex justify-center gap-5 py-4 rounded-md ${themeConfig[theme].layout.textColor} ${themeConfig[theme].todo.backgroundColor} mt-4 sm:hidden`}
+        className={`flex justify-center gap-5 mt-4`}
       >
         <button
-          className={`${
-            filter === "all" ? "text-bright-blue" : ""
-          } cursor-pointer ${themeConfig[theme].layout.hoverColor}`}
-          onClick={() => setFilter("all")}
+          className={`${themeConfig[theme].layout.textColor} ${themeConfig[theme].todo.backgroundColor} cursor-pointer ${themeConfig[theme].layout.hoverColor} p-3 rounded-md`} onClick={() => completeAll()}
         >
-          All
+          Complete All
         </button>
+
         <button
-          className={`${
-            filter === "active" ? "text-bright-blue" : ""
-          } cursor-pointer ${themeConfig[theme].layout.hoverColor}`}
-          onClick={() => setFilter("active")}
+          className={`${themeConfig[theme].layout.textColor} ${themeConfig[theme].todo.backgroundColor} cursor-pointer ${themeConfig[theme].layout.hoverColor} p-3 rounded-md`}
+          onClick={() => clearCompleted()}
         >
-          Active
+          Clear Completed
         </button>
+
         <button
-          className={`${
-            filter === "completed" ? "text-bright-blue" : ""
-          } cursor-pointer ${themeConfig[theme].layout.hoverColor}`}
-          onClick={() => setFilter("completed")}
+          className={`${themeConfig[theme].layout.textColor} ${themeConfig[theme].todo.backgroundColor} cursor-pointer ${themeConfig[theme].layout.hoverColor} p-3 rounded-md`} onClick={() => deleteAll()}
         >
-          Completed
+          Clear All
         </button>
       </div>
     </>
