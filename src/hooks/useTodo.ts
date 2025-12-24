@@ -84,11 +84,6 @@ export const useTodo = () => {
     setTodoList([])
   }
 
-function bodyColor() {
-  
-}
-
-
   return {
     addTodo,
     toggleTodoCompleted,
